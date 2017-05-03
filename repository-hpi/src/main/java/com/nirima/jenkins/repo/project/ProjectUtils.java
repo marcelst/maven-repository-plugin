@@ -7,10 +7,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.nirima.jenkins.repo.RepositoryDirectory;
 import com.nirima.jenkins.repo.RepositoryElement;
-import hudson.model.BuildableItem;
-import hudson.model.BuildableItemWithBuildWrappers;
-import hudson.model.Item;
-import hudson.model.Job;
+import hudson.model.*;
 import jenkins.branch.MultiBranchProject;
 import jenkins.model.Jenkins;
 
@@ -29,8 +26,8 @@ public class ProjectUtils {
                         if (from instanceof BuildableItemWithBuildWrappers) {
                             return new ProjectElement(parent, ((BuildableItemWithBuildWrappers) from).asProject());
                         }
-                        if (from instanceof MultiBranchProject) {
-                            return new MultiBranchProjectElement(parent, (MultiBranchProject) from);
+                        if (from instanceof ItemGroup) {
+                            return new ItemGroupDirectory(parent, (ItemGroup) from);
                         }
                         if (from instanceof Job) {
                             return new ProjectElement(parent, (Job) from);
